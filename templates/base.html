@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QueryNest – {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <style>
+    :root { --primary:#1a3c6e; --accent:#f0a500; }
+    body  { background:#f4f6fb; font-family:'Segoe UI',sans-serif; }
+
+    .navbar { background:var(--primary) !important; }
+    .navbar-brand { font-weight:700; font-size:1.4rem; color:#fff !important; letter-spacing:1px; }
+    .navbar-brand span { color:var(--accent); }
+    .nav-link { color:rgba(255,255,255,.85) !important; }
+    .nav-link:hover { color:var(--accent) !important; }
+
+    .btn-primary  { background:var(--primary); border-color:var(--primary); }
+    .btn-primary:hover { background:#14305a; }
+
+    .card { border:none; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,.07); }
+    .card-header { border-radius:12px 12px 0 0 !important; }
+
+    .badge-admin { background:var(--accent); color:#fff; font-size:.75rem; padding:3px 8px; border-radius:20px; }
+
+    footer { background:var(--primary); color:rgba(255,255,255,.7); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('home') }}">
+      <i class="bi bi-chat-dots-fill me-1"></i>Query<span>Nest</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}"><i class="bi bi-house"></i> Home</a></li>
+
+        {% if session.get('user_id') %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('chatbot') }}"><i class="bi bi-robot"></i> Chatbot</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('notices') }}"><i class="bi bi-bell"></i> Notices</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('academic') }}"><i class="bi bi-book-half"></i> Academic</a></li>
+          {% if session.get('role') == 'admin' %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}"><i class="bi bi-shield-lock"></i> Admin Panel</a></li>
+          {% endif %}
+          <li class="nav-item ms-2 d-flex align-items-center gap-2">
+            <span class="text-white"><i class="bi bi-person-circle"></i> {{ session.user_name }}
+              {% if session.role == 'admin' %}<span class="badge-admin ms-1">Admin</span>{% endif %}
+            </span>
+            <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-light">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item ms-2 d-flex align-items-center gap-2">
+            <a href="{{ url_for('login') }}" class="btn btn-sm btn-outline-light">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-sm fw-semibold" style="background:var(--accent);color:#fff;border:none;">Register</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-3">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endwith %}
+</div>
+
+<main class="container my-4">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="text-center py-3 mt-5">
+  <small>© 2026 QueryNest All Right Reserved &nbsp;|&nbsp; Created by Team Phoenix</small><br>
+  <small>Rakib Al Hassan &nbsp;|&nbsp; MD Faysal Anam Bappy &nbsp;|&nbsp; MD Rashed Hasan &nbsp;|&nbsp; Dept. of SWE</small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

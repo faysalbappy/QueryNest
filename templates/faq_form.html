@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} FAQ{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header py-3" style="background:#1a3c6e; color:#fff;">
+        <h5 class="mb-0 fw-bold">
+          <i class="bi bi-question-circle me-2"></i>{{ action }} FAQ
+        </h5>
+      </div>
+      <div class="card-body p-4">
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Question <span class="text-danger">*</span></label>
+            <input type="text" name="question" class="form-control"
+                   value="{{ faq.question if faq else '' }}"
+                   placeholder="e.g. What is the credit hour for SE331?" required/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Answer <span class="text-danger">*</span></label>
+            <textarea name="answer" class="form-control" rows="4"
+                      placeholder="Provide a clear and complete answer…" required>{{ faq.answer if faq else '' }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Keywords</label>
+            <input type="text" name="keywords" class="form-control"
+                   value="{{ faq.keywords if faq else '' }}"
+                   placeholder="e.g. credit hour credits SE331 (space separated)"/>
+            <div class="form-text">These keywords help the chatbot match student questions.</div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Category</label>
+            <select name="category" class="form-select">
+              <option value="General" {% if faq and faq.category=='General' %}selected{% endif %}>General</option>
+              <option value="Academic" {% if faq and faq.category=='Academic' %}selected{% endif %}>Academic</option>
+              <option value="Exam" {% if faq and faq.category=='Exam' %}selected{% endif %}>Exam</option>
+              <option value="Lab" {% if faq and faq.category=='Lab' %}selected{% endif %}>Lab</option>
+              <option value="Schedule" {% if faq and faq.category=='Schedule' %}selected{% endif %}>Schedule</option>
+              <option value="Campus" {% if faq and faq.category=='Campus' %}selected{% endif %}>Campus</option>
+            </select>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4 fw-semibold">
+              <i class="bi bi-check-lg me-1"></i>{{ action }} FAQ
+            </button>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-5 col-lg-4">
+    <div class="card shadow-lg">
+      <div class="card-body p-4">
+
+        <div class="text-center mb-4">
+          <div class="fs-1" style="color:#1a3c6e;"><i class="bi bi-chat-dots-fill"></i></div>
+          <h3 class="fw-bold mt-1" style="color:#1a3c6e;">QueryNest</h3>
+          <p class="text-muted small">Sign in to your account</p>
+        </div>
+
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Username</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" name="name" class="form-control"
+                     placeholder="Enter your username" required autofocus/>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input type="password" name="password" class="form-control"
+                     placeholder="Enter your password" required/>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+          </button>
+        </form>
+
+        <div class="text-center mt-3">
+          <small class="text-muted">Don't have an account?
+            <a href="{{ url_for('register') }}" class="fw-semibold text-decoration-none">Register here</a>
+          </small>
+        </div>
+
+        <hr class="my-3"/>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

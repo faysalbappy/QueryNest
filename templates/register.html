@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-5 col-lg-4">
+    <div class="card shadow-lg">
+      <div class="card-body p-4">
+
+        <div class="text-center mb-4">
+          <div class="fs-1" style="color:#1a3c6e;"><i class="bi bi-person-plus-fill"></i></div>
+          <h3 class="fw-bold mt-1" style="color:#1a3c6e;">Create Account</h3>
+          <p class="text-muted small">Register as a SWE Student</p>
+        </div>
+
+        <form method="POST">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Username <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" name="name" class="form-control"
+                     placeholder="Choose a username (min 3 chars)"
+                     minlength="3" required autofocus/>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input type="password" name="password" id="pw" class="form-control"
+                     placeholder="At least 6 characters" minlength="6" required/>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Confirm Password <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+              <input type="password" name="confirm_password" id="cpw" class="form-control"
+                     placeholder="Re-enter your password" required/>
+            </div>
+            <div id="pw-match-msg" class="form-text"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+            <i class="bi bi-person-check me-1"></i> Register
+          </button>
+        </form>
+
+        <div class="text-center mt-3">
+          <small class="text-muted">Already have an account?
+            <a href="{{ url_for('login') }}" class="fw-semibold text-decoration-none">Login here</a>
+          </small>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Live password match indicator
+  const pw  = document.getElementById('pw');
+  const cpw = document.getElementById('cpw');
+  const msg = document.getElementById('pw-match-msg');
+  cpw.addEventListener('input', () => {
+    if (cpw.value === '') { msg.textContent = ''; return; }
+    if (pw.value === cpw.value) {
+      msg.textContent = '✅ Passwords match';
+      msg.style.color = 'green';
+    } else {
+      msg.textContent = '❌ Passwords do not match';
+      msg.style.color = 'red';
+    }
+  });
+</script>
+{% endblock %}

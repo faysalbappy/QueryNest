@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Notices{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold" style="color:#1a3c6e;">
+    <i class="bi bi-megaphone-fill me-2"></i>Department Notices
+  </h2>
+  <span class="text-muted small">{{ notices|length }} notice(s) found</span>
+</div>
+
+{% if notices %}
+  <div class="row g-3">
+    {% for n in notices %}
+    <div class="col-12">
+      <div class="card border-start border-4 border-primary">
+        <div class="card-body px-4 py-3">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="fw-bold mb-1" style="color:#1a3c6e;">{{ n.title }}</h5>
+            <span class="badge text-bg-light border">
+              <i class="bi bi-calendar3 me-1"></i>{{ n.publish_date }}
+            </span>
+          </div>
+          <p class="mb-0 text-muted">{{ n.description }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="text-center text-muted py-5">
+    <i class="bi bi-inbox fs-1"></i>
+    <p class="mt-3 fs-5">No notices available at the moment.</p>
+  </div>
+{% endif %}
+
+{% endblock %}

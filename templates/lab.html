@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Lab & Projects{% endblock %}
+
+{% block content %}
+<h3 class="fw-bold mb-4"><i class="bi bi-cpu me-2" style="color:var(--primary);"></i>Lab Schedule & Project Guidelines</h3>
+
+<div class="row g-4">
+
+  <!-- Lab Schedule -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header py-3" style="background:var(--primary);color:#fff;">
+        <strong><i class="bi bi-calendar-week me-2"></i>Lab Schedule — Spring 2026</strong>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Course Code</th>
+              <th>Course Name</th>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Room</th>
+              <th>Instructor</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in schedules %}
+            <tr>
+              <td><span class="badge bg-success">{{ s.course_code }}</span></td>
+              <td>{{ s.course_name }}</td>
+              <td>
+                <span class="badge" style="background:var(--accent);">
+                  <i class="bi bi-calendar3 me-1"></i>{{ s.day }}
+                </span>
+              </td>
+              <td><i class="bi bi-clock me-1 text-muted"></i>{{ s.time }}</td>
+              <td><i class="bi bi-pc-display me-1 text-muted"></i>{{ s.room }}</td>
+              <td><i class="bi bi-person-fill me-1 text-muted"></i>{{ s.instructor }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Guidelines -->
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header py-3" style="background:var(--primary);color:#fff;">
+        <strong><i class="bi bi-kanban me-2"></i>Project Guidelines</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <span class="badge rounded-pill mt-1" style="background:var(--accent);">01</span>
+            <div>
+              <strong>Team Formation</strong><br>
+              <small class="text-muted">Teams must have 3–4 members from the same section. Solo projects are not allowed.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <span class="badge rounded-pill mt-1" style="background:var(--accent);">02</span>
+            <div>
+              <strong>Topic Selection & Approval</strong><br>
+              <small class="text-muted">Submit your topic to your supervisor for approval before Week 3.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <span class="badge rounded-pill mt-1" style="background:var(--accent);">03</span>
+            <div>
+              <strong>Proposal Submission — Week 4</strong><br>
+              <small class="text-muted">Write a 2-page project proposal covering objectives, tools, and timeline.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <span class="badge rounded-pill mt-1" style="background:var(--accent);">04</span>
+            <div>
+              <strong>Progress Report — Week 8</strong><br>
+              <small class="text-muted">Submit a mid-project progress report showing completed features and remaining work.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <span class="badge rounded-pill mt-1" style="background:var(--accent);">05</span>
+            <div>
+              <strong>Final Presentation — Week 16</strong><br>
+              <small class="text-muted">Live demo + 10-minute presentation. All team members must speak. Submit source code on GitHub.</small>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab Report Guidelines -->
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header py-3" style="background:#198754;color:#fff;">
+        <strong><i class="bi bi-file-earmark-text me-2"></i>Lab Report Guidelines</strong>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <i class="bi bi-check-circle-fill mt-1" style="color:#198754;"></i>
+            <div>
+              <strong>Submission Deadline</strong><br>
+              <small class="text-muted">Lab reports must be submitted within 1 week of the lab session.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <i class="bi bi-check-circle-fill mt-1" style="color:#198754;"></i>
+            <div>
+              <strong>Format</strong><br>
+              <small class="text-muted">Include: Objective, Tools Used, Code (with comments), Output Screenshots, Conclusion.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <i class="bi bi-check-circle-fill mt-1" style="color:#198754;"></i>
+            <div>
+              <strong>Submission Method</strong><br>
+              <small class="text-muted">Submit as a PDF with your student ID and course code on the cover page.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <i class="bi bi-x-circle-fill mt-1 text-danger"></i>
+            <div>
+              <strong>Late Submission Policy</strong><br>
+              <small class="text-muted">Late reports will have 20% marks deducted per day. Reports more than 3 days late will not be accepted.</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start px-0">
+            <i class="bi bi-x-circle-fill mt-1 text-danger"></i>
+            <div>
+              <strong>Plagiarism</strong><br>
+              <small class="text-muted">Copying another student's report will result in zero marks for both students.</small>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
