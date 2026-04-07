@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Notice{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="page-header">
+      <h3 class="fw-bold mb-1">
+        <i class="bi bi-megaphone-fill me-2"></i>{{ action }} Notice
+      </h3>
+    </div>
+
+    <div class="card">
+      <div class="card-body p-4">
+        <form method="post">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Title</label>
+            <input type="text" name="title" class="form-control"
+                   value="{{ notice.title if notice else '' }}"
+                   placeholder="e.g. Mid-term Exam Schedule Released" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Description</label>
+            <textarea name="description" class="form-control" rows="5"
+                      placeholder="Full notice content…" required>{{ notice.description if notice else '' }}</textarea>
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Publish Date</label>
+            <input type="date" name="publish_date" class="form-control"
+                   value="{{ notice.publish_date if notice else '' }}" required>
+          </div>
+          <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-primary fw-semibold px-4">
+              <i class="bi bi-check-lg me-2"></i>{{ action }} Notice
+            </button>
+            <a href="{{ url_for('admin_notices') }}" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
